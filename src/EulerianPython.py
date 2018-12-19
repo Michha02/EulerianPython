@@ -1,6 +1,6 @@
 import time
 import sys
-from src import Eulerian
+from src.Eulerian import Eulerian
 
 flagt = False
 flagm = False
@@ -25,7 +25,7 @@ for i in sys.argv:
         exit(3)
 
 if flagm:
-    print ("Se va a calcular mediante memorization")
+    print ("Se va a calcular mediante memoization")
 else:
     print ("Se va a calcular mediante tabulation")
 
@@ -34,15 +34,16 @@ f = open(sys.argv[len(sys.argv)-1])
 for linea in f:
     n = int(linea[0:linea.index(" ")])
     m = int(linea[linea.index(" "):len(linea)])
+    e = Eulerian(n,m)
     if m >= n:
         print ("No se puede hacer la operación porque en " + "n=" + str(n) + " y m=" + str(m) + " n < m")
     elif m < 0:
         print("No se puede hacer la operación con números negativos")
     else:
         if flagm:
-            print("n=" + str(n) + ", m=" + str(m) + "; Eulerian Number=" + str(Eulerian.eulerianmem(n, m)))
+            print("n=" + str(n) + ", m=" + str(m) + "; Eulerian Number=" + str(e.eulerianmem(n, m)))
         else:
-            print("n=" + str(n) + ", m=" + str(m) + "; Eulerian Number=" + str(Eulerian.euleriantab(n, m)))
+            print("n=" + str(n) + ", m=" + str(m) + "; Eulerian Number=" + str(e.euleriantab(n, m)))
 
 if flagt:
     print("Ejecución terminada en " + str(time.time() - start_time) + " segundos")
